@@ -1,14 +1,13 @@
-import sys
-
 import argparse
 import configparser
 import logbook
 import os
+import sys
 
-from dao import TestDbHandler
+from dao import AdhocDatabaseHandler
 
 
-class HelloWorldConnDb(object):
+class HelloWorldConnDb2(object):
     config = None
     logger = None
     db = None
@@ -59,7 +58,7 @@ class HelloWorldConnDb(object):
             self.logger.handlers.append(log_handler)
 
         # init database
-        self.db = TestDbHandler.instantiate_from_configparser(self.config, self.logger)
+        self.db = AdhocDatabaseHandler.instantiate_from_configparser(self.config, self.logger)
 
     def run(self):
         self.init()
@@ -73,7 +72,7 @@ class HelloWorldConnDb(object):
         campaign_id = 330
         tracking_method = -2
         rowcount = self.db.set_tracking_method(campaign_id, tracking_method)
-        self.logger.info("Set Tracking of Campaign #%d = %d, with status %d" % (campaign_id, tracking_method, rowcount))
+        self.logger.info("Set Tracking of Campaign #%d = %d" % (campaign_id, tracking_method))
 
         records = self.db.get_campaign_detail(campaign_id)
         if len(records) > 0:
@@ -86,7 +85,7 @@ class HelloWorldConnDb(object):
 
 
 def main():
-    mainclass = HelloWorldConnDb()
+    mainclass = HelloWorldConnDb2()
     # try:
     mainclass.run()
     # except Exception as exc:
