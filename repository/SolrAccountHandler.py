@@ -1,5 +1,6 @@
-import pysolr
 import logging
+
+import pysolr
 
 
 class SolrAccountHandler(object):
@@ -9,7 +10,7 @@ class SolrAccountHandler(object):
     _logger = None
 
     @staticmethod
-    def getInstance(__solrAccountUrl):
+    def get_instance(__solrAccountUrl):
         """ Static access method. """
         if SolrAccountHandler._instance is None:
             SolrAccountHandler(__solrAccountUrl)
@@ -24,7 +25,7 @@ class SolrAccountHandler(object):
             SolrAccountHandler._instance = self
             self._logger = logging.getLogger()
 
-    def setLogger(self, logger):
+    def set_logger(self, logger):
         self._logger = logger
 
     def get_solr_core(self, _clientid, use_dict=False):

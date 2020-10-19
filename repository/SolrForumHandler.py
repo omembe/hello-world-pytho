@@ -1,4 +1,5 @@
 import logging
+
 import pysolr
 
 
@@ -9,7 +10,7 @@ class SolrForumHandler(object):
     logger = None
 
     @staticmethod
-    def getInstance(_solrNewsUrl, use_dict=False):
+    def get_instance(_solrNewsUrl, use_dict=False):
         """ Static access method. """
         if SolrForumHandler._instance is None:
             SolrForumHandler(_solrNewsUrl, use_dict)
@@ -28,5 +29,5 @@ class SolrForumHandler(object):
             else:
                 self._solr = pysolr.Solr(_solrNewsUrl, timeout=10, always_commit=False)
 
-    def getSolr(self):
+    def get_solr(self):
         return self._solr

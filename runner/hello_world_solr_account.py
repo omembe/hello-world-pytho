@@ -63,7 +63,7 @@ class HelloWorldSolrAccount(object):
             self.logger.handlers.append(log_handler)
 
         # init database
-        self.solrAccount = SolrAccountHandler.getInstance((self.config.get('Solr', 'solr_url')))
+        self.solrAccount = SolrAccountHandler.get_instance((self.config.get('Solr', 'solr_url')))
 
     def get_sample_solr_data(self, start_date, end_date, channel_id):
         start_date = start_date.replace('-', '')

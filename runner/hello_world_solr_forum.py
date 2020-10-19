@@ -62,7 +62,7 @@ class HelloWorldSolrForum(object):
             self.logger.handlers.append(log_handler)
 
         # init database
-        self.solrForum = SolrForumHandler.getInstance((self.config.get('Solr', 'solr_forum_url')), True)
+        self.solrForum = SolrForumHandler.get_instance((self.config.get('Solr', 'solr_forum_url')), True)
 
     def get_sample_solr_data(self, start_date, end_date):
         self.logger.info("Get Sample Forum Data")
@@ -73,7 +73,7 @@ class HelloWorldSolrForum(object):
         rows = 10
         params = {'rows': rows, 'start': idx}
         try:
-            results = self.solrForum.getSolr().search(query, None, **params)
+            results = self.solrForum.get_solr().search(query, None, **params)
             while results is not None and results['response']['numFound'] > 0 and len(results['response']['docs']) > 0:
                 for doc1 in results['response']['docs']:
                     self.logger.debug(doc1)
@@ -82,7 +82,7 @@ class HelloWorldSolrForum(object):
                     self.logger.info("URL: %s => TITLE: %s" % (url, title))
                 idx = idx + rows
                 params = {'rows': rows, 'start': idx}
-                results = self.solrForum.getSolr().search(query, None, **params)
+                results = self.solrForum.get_solr().search(query, None, **params)
 
         except SolrError as exc:
             self.logger.error(exc)

@@ -1,9 +1,9 @@
-import sys
-
 import argparse
 import configparser
-import logbook
 import os
+import sys
+
+import logbook
 
 from dao import TestDbHandler
 

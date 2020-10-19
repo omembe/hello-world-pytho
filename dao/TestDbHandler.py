@@ -6,17 +6,17 @@ from dao.MysqlDao import MysqlDao
 class TestDbHandler(MysqlDao):
 
     @staticmethod
-    def getInstance(_host, _port, _user, _pass, _dbname):
+    def get_instance(_host, _port, _user, _pass, _dbname):
         return TestDbHandler(_host, _port, _user, _pass, _dbname)
 
     @staticmethod
     def instantiate_from_configparser(cfg, logger):
         if isinstance(cfg, configparser.ConfigParser):
-            dbhandler = TestDbHandler.getInstance(cfg.get('Database', 'host'), cfg.get('Database', 'port'),
-                                                  cfg.get('Database', 'username'),
-                                                  cfg.get('Database', 'password'),
-                                                  cfg.get('Database', 'dbname'))
-            dbhandler.setLogger(logger)
+            dbhandler = TestDbHandler.get_instance(cfg.get('Database', 'host'), cfg.get('Database', 'port'),
+                                                   cfg.get('Database', 'username'),
+                                                   cfg.get('Database', 'password'),
+                                                   cfg.get('Database', 'dbname'))
+            dbhandler.set_logger(logger)
             return dbhandler
         else:
             raise Exception('cfg is not an instance of configparser')
