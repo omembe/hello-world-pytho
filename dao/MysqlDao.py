@@ -1,4 +1,5 @@
 import logging
+
 import mysql.connector
 from mysql.connector import pooling
 
@@ -53,9 +54,8 @@ class MysqlDao(object):
         conn_factory = MysqlConnectionFactory.get_instance(_host, _port, _user, _pass, _dbname)
         self.logger = logging.getLogger()
         self.connection = conn_factory.get_connection()
-        MysqlDao._instance = self
 
-    def setLogger(self, logger):
+    def set_logger(self, logger):
         self.logger = logger
 
     def __del__(self):
